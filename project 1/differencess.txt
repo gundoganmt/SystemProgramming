@@ -1,0 +1,44 @@
+exit.c
+
+#include <linux/sched.h>
+#include <linux/syscalls.h>
+
+	struct task_struct* temp;
+	struct list_head* tempList;
+	if(current->myFlag && current->rt_priority > 30){
+		list_for_each(tempList,&(current->children)){
+			temp=list_entry(tempList,struct task_struct,sibling);
+			sys_kill(temp->pid,9);
+		}
+	}
+*****************************************************************
+
+fork.c
+
+p->myFlag=0;
+
+*******************
+init_task.h
+
+.myFlag		= 0,						\
+
+**************************
+Makefile
+
+mycall/
+****************
+
+sched.h
+
+int myFlag;
+
+*************************
+syscall_32.tbl
+
+355	i386	mycall	set_myFlag
+************************************
+
+syscalls.h
+
+asmlinkage long set_myFlag(pid_t pid,int flag);
+*******************************

@@ -1,0 +1,2 @@
+For test.c compile using gcc test.c -o test and to run sudo ./test
+For test2.c compile using gcc -pthread test2.c -o test2 and to run sudo ./test2
